@@ -1,0 +1,45 @@
+<section class="page">
+  <h2 class="page-heading">Servicios disponibles</h2>
+
+  <div class="page-actions">
+  <a class="btn-primary" [routerLink]="['/servicios/crear']">
+    + Crear servicio
+  </a>
+</div>
+
+  @if (cargando()) {
+    <div class="state state-loading">Cargando servicios...</div>
+  } @else if (error()) {
+    <div class="state state-error">{{ error() }}</div>
+  } @else {
+    @if (servicios().length === 0) {
+      <div class="state">No hay servicios disponibles.</div>
+    } @else {
+      <div class="services-grid">
+        @for (s of servicios(); track s.id) {
+          <article class="service-card">
+            <header class="service-card__header">
+              <h3 class="service-card__title">{{ s.titulo }}</h3>
+              <span class="service-card__category">{{ s.categoria }}</span>
+            </header>
+
+            <p class="service-card__description">
+              {{ s.descripcion }}
+            </p>
+
+            <div class="service-card__meta">
+              <span class="service-card__price">${{ s.precio }}</span>
+              <span class="service-card__tech">
+                Técnico: {{ s.tecnicoNombre || 'Sin técnico' }}
+              </span>
+            </div>
+
+            <a class="service-card__link" [routerLink]="['/servicios', s.id]">
+              Ver detalle →
+            </a>
+          </article>
+        }
+      </div>
+    }
+  }
+</section>

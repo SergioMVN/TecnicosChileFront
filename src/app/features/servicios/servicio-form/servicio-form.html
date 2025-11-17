@@ -1,0 +1,38 @@
+<section class="detail-page">
+  <a routerLink="/servicios" class="back-link">← Volver a la lista</a>
+
+  <h2 class="detail-title">Crear servicio</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-card">
+    <div class="form-row">
+      <label>Título</label>
+      <input type="text" formControlName="titulo" />
+    </div>
+
+    <div class="form-row">
+      <label>Descripción</label>
+      <textarea rows="3" formControlName="descripcion"></textarea>
+    </div>
+
+    <div class="form-row-inline">
+      <div class="form-row">
+        <label>Precio</label>
+        <input type="number" formControlName="precio" />
+      </div>
+      <div class="form-row">
+        <label>Categoría</label>
+        <input type="text" formControlName="categoria" />
+      </div>
+    </div>
+
+    <button class="btn-primary" type="submit" [disabled]="creando || form.invalid">
+      {{ creando ? 'Creando...' : 'Guardar servicio' }}
+    </button>
+
+    @if (error) {
+      <div class="state state-error form-message">{{ error }}</div>
+    } @else if (mensajeOk) {
+      <div class="state form-message">{{ mensajeOk }}</div>
+    }
+  </form>
+</section>

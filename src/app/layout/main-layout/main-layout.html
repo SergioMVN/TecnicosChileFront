@@ -1,0 +1,72 @@
+<div class="app-shell">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-circle">TC</div>
+      <div class="logo-text">
+        <span class="logo-title">TécnicosChile</span>
+        <span class="logo-subtitle">Panel</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/servicios" routerLinkActive="active" class="nav-item">
+        🛠 Servicios
+      </a>
+
+      <a
+        *ngIf="esTecnicoOAdmin()"
+        routerLink="/panel"
+        routerLinkActive="active"
+        class="nav-item"
+      >
+        📋 Panel técnico
+      </a>
+    </nav>
+
+    <div class="sidebar-footer" *ngIf="isLoggedIn()">
+      <div class="user-info">
+        <div class="user-avatar">{{ getInicialUsuario() }}</div>
+        <div class="user-text">
+          <span class="user-name">{{ getNombreUsuario() }}</span>
+          <span class="user-role">{{ getRolUsuario() }}</span>
+        </div>
+      </div>
+
+      <button class="btn-logout" (click)="openLogoutConfirm()">
+        Cerrar sesión
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="app-main">
+    <header class="topbar">
+      <h1 class="topbar-title">TécnicosChile</h1>
+    </header>
+
+    <main class="app-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
+<!-- MODAL CONFIRMACIÓN LOGOUT -->
+<div class="modal-backdrop" *ngIf="showLogoutConfirm">
+  <div class="modal-dialog">
+    <h3 class="modal-title">¿Cerrar sesión?</h3>
+    <p class="modal-text">
+      ¿Estás seguro que quieres cerrar tu sesión en TécnicosChile?
+    </p>
+
+    <div class="modal-actions">
+      <button class="btn-secondary" (click)="cancelLogout()">
+        Cancelar
+      </button>
+
+      <button class="btn-danger" (click)="confirmLogout()">
+        Sí, cerrar sesión
+      </button>
+    </div>
+  </div>
+</div>

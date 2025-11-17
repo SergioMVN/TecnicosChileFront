@@ -1,0 +1,27 @@
+<section class="login-wrapper">
+  <div class="login-container">
+    <h2 class="login-title">Iniciar sesión</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-card">
+      
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" formControlName="email" />
+      </div>
+
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" />
+      </div>
+
+      <button class="btn-primary" type="submit" [disabled]="cargando || form.invalid">
+        {{ cargando ? 'Ingresando...' : 'Entrar' }}
+      </button>
+
+      @if (error) {
+        <div class="error-msg">{{ error }}</div>
+      }
+
+    </form>
+  </div>
+</section>

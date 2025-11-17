@@ -1,0 +1,33 @@
+<section class="detail-page">
+  <a routerLink="/servicios" class="back-link">← Volver a la lista</a>
+
+  <h2 class="detail-title">Detalle del servicio</h2>
+
+  @if (cargando()) {
+    <div class="state state-loading">Cargando servicio...</div>
+  } @else if (error()) {
+    <div class="state state-error">{{ error() }}</div>
+  } @else if (servicio()) {
+    <article class="detail-card">
+      <h3 class="detail-card__title">
+        {{ servicio()!.titulo }}
+      </h3>
+
+      <p class="detail-card__category">
+        Categoría: <span>{{ servicio()!.categoria }}</span>
+      </p>
+
+      <p class="detail-card__field">
+        <span>Descripción:</span> {{ servicio()!.descripcion }}
+      </p>
+
+      <p class="detail-card__field">
+        <span>Precio:</span> ${{ servicio()!.precio }}
+      </p>
+
+      <p class="detail-card__field">
+        <span>Técnico:</span> {{ servicio()!.tecnicoNombre || 'Sin técnico' }}
+      </p>
+    </article>
+  }
+</section>
