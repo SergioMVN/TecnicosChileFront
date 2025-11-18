@@ -24,19 +24,30 @@
       </a>
     </nav>
 
-    <div class="sidebar-footer" *ngIf="isLoggedIn()">
-      <div class="user-info">
-        <div class="user-avatar">{{ getInicialUsuario() }}</div>
-        <div class="user-text">
-          <span class="user-name">{{ getNombreUsuario() }}</span>
-          <span class="user-role">{{ getRolUsuario() }}</span>
-        </div>
-      </div>
-
-      <button class="btn-logout" (click)="openLogoutConfirm()">
-        Cerrar sesión
-      </button>
+  <!-- SI ESTÁ LOGUEADO -->
+<div class="sidebar-footer" *ngIf="isLoggedIn(); else noLogueado">
+  <div class="user-info">
+    <div class="user-avatar">{{ getInicialUsuario() }}</div>
+    <div class="user-text">
+      <span class="user-name">{{ getNombreUsuario() }}</span>
+      <span class="user-role">{{ getRolUsuario() }}</span>
     </div>
+  </div>
+
+  <button class="btn-logout" (click)="openLogoutConfirm()">
+    Cerrar sesión
+  </button>
+</div>
+
+<!-- SI NO ESTÁ LOGUEADO -->
+<ng-template #noLogueado>
+  <div class="sidebar-footer">
+    <button class="btn-logout" (click)="goToLogin()">
+      Iniciar sesión
+    </button>
+  </div>
+</ng-template>
+
   </aside>
 
   <!-- CONTENIDO PRINCIPAL -->

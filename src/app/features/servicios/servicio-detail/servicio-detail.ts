@@ -13,7 +13,6 @@ import { Servicio } from '../../../models/Servicio';
 })
 export class ServicioDetail implements OnInit {
 
-  // 👇 estas propiedades son las que usa el HTML
   servicio = signal<Servicio | null>(null);
   cargando = signal(true);
   error = signal<string | null>(null);

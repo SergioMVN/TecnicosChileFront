@@ -22,6 +22,11 @@ export class MainLayoutComponent {
     return this.auth.isLoggedIn();
   }
 
+  goToLogin() {
+  this.router.navigate(['/login']);
+}
+
+
   esTecnicoOAdmin() {
     const role = this.auth.getRole();
     return role === 'Tecnico' || role === 'Admin';
