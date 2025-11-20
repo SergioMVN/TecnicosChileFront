@@ -1,38 +1,75 @@
-<section class="detail-page">
-  <a routerLink="/servicios" class="back-link">← Volver a la lista</a>
+<section>
+  <h2 class="detail-title">Crear Servicio</h2>
 
-  <h2 class="detail-title">Crear servicio</h2>
+  <form [formGroup]="form" class="form-card" (ngSubmit)="abrirConfirmacion()">
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-card">
     <div class="form-row">
       <label>Título</label>
-      <input type="text" formControlName="titulo" />
+      <input formControlName="titulo" type="text">
     </div>
 
     <div class="form-row">
       <label>Descripción</label>
-      <textarea rows="3" formControlName="descripcion"></textarea>
+      <textarea formControlName="descripcion"></textarea>
     </div>
 
-    <div class="form-row-inline">
-      <div class="form-row">
-        <label>Precio</label>
-        <input type="number" formControlName="precio" />
-      </div>
-      <div class="form-row">
-        <label>Categoría</label>
-        <input type="text" formControlName="categoria" />
-      </div>
+    <div class="form-row">
+      <label>Precio</label>
+      <input formControlName="precio" type="number">
     </div>
 
-    <button class="btn-primary" type="submit" [disabled]="creando || form.invalid">
-      {{ creando ? 'Creando...' : 'Guardar servicio' }}
+    <div class="form-row">
+      <label>Categoría</label>
+      <input formControlName="categoria" type="text">
+    </div>
+
+    <button type="submit" class="primary-btn" [disabled]="creando">
+      {{ creando ? 'Creando...' : 'Crear servicio' }}
     </button>
-
-    @if (error) {
-      <div class="state state-error form-message">{{ error }}</div>
-    } @else if (mensajeOk) {
-      <div class="state form-message">{{ mensajeOk }}</div>
-    }
   </form>
+
+  <!-- MODAL CONFIRMACIÓN -->
+  @if (modalConfirmAbierto) {
+    <div class="modal-backdrop">
+      <div class="modal">
+        <h3 class="modal__title">Confirmar creación</h3>
+        <p class="modal__text">¿Deseas crear este servicio?</p>
+
+        <div class="modal__buttons">
+          <button
+            class="modal__button modal__button--secondary"
+            (click)="cerrarConfirmacion()">
+            Cancelar
+          </button>
+
+          <button
+            class="modal__button"
+            (click)="confirmarCreacion()">
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- MODAL RESULTADO -->
+  @if (modalResultadoAbierto) {
+    <div class="modal-backdrop">
+      <div class="modal">
+        <h3 class="modal__title">
+          {{ mensajeOk ? 'Servicio creado' : 'Error' }}
+        </h3>
+
+        <p class="modal__text"
+           [class.modal__text--ok]="mensajeOk"
+           [class.modal__text--error]="error">
+          {{ mensajeOk || error }}
+        </p>
+
+        <button class="modal__button" (click)="cerrarResultado()">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  }
 </section>

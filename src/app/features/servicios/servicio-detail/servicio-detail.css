@@ -49,3 +49,125 @@
 .detail-card__field span {
   font-weight: 600;
 }
+
+/* Contenedor de las acciones (botón + mensajes) */
+.detail-card__actions {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Botón principal */
+.detail-card__action {
+  background-color: #4f46e5; /* mismo morado que ya usas en categoría */
+  color: white;
+  border: none;
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem; /* igual que el borde de tu card */
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.25);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.detail-card__action:hover {
+  background-color: #4338ca;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.35);
+}
+
+.detail-card__action:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.detail-card__action:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Éxito */
+.state-success {
+  color: #15803d;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Error */
+.state-error {
+  color: #b91c1c;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ==== MODAL ==== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.4rem 1.6rem;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.35);
+  border: 1px solid #e5e7eb;
+}
+
+.modal__title {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.modal__text {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+}
+
+.modal__text--ok {
+  color: #15803d;
+}
+
+.modal__text--error {
+  color: #b91c1c;
+}
+
+.modal__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: none;
+  background-color: #4b5563;
+  color: #f9fafb;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.modal__button:hover {
+  background-color: #374151;
+  transform: translateY(-1px);
+}
+
+.modal__button:active {
+  transform: translateY(0);
+}

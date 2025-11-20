@@ -6,6 +6,7 @@
   @if (cargando()) {
     <div class="state state-loading">Cargando servicio...</div>
   } @else if (error()) {
+    <!-- ⬅️ ESTE error es SOLO de CARGA -->
     <div class="state state-error">{{ error() }}</div>
   } @else if (servicio()) {
     <article class="detail-card">
@@ -28,6 +29,73 @@
       <p class="detail-card__field">
         <span>Técnico:</span> {{ servicio()!.tecnicoNombre || 'Sin técnico' }}
       </p>
+
+      <div class="detail-card__actions">
+        <button
+          class="detail-card__action"
+          (click)="contratar()"
+          [disabled]="creandoReserva()"
+        >
+          {{ creandoReserva() ? 'Creando reserva...' : 'Contratar servicio' }}
+        </button>
+      </div>
     </article>
+  }
+
+  <!-- 🟣 MODAL DE CONFIRMACIÓN -->
+  @if (modalConfirmAbierto()) {
+    <div class="modal-backdrop">
+      <div class="modal">
+        <h3 class="modal__title">Confirmar reserva</h3>
+
+        @if (servicio()) {
+          <p class="modal__text">
+            ¿Deseas contratar el servicio
+            <strong>{{ servicio()!.titulo }}</strong>
+            por ${{ servicio()!.precio }}?
+          </p>
+        }
+
+        <div class="modal__buttons">
+          <button
+            class="modal__button modal__button--secondary"
+            (click)="cerrarConfirmacion()"
+          >
+            Cancelar
+          </button>
+          <button
+            class="modal__button"
+            (click)="confirmarContratacion()"
+          >
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- 🟢 MODAL DE RESULTADO (éxito / error de la reserva) -->
+  @if (modalAbierto()) {
+    <div class="modal-backdrop">
+      <div class="modal">
+        <h3 class="modal__title">
+          {{ modalTitulo() }}
+        </h3>
+
+        @if (mensajeOk()) {
+          <p class="modal__text modal__text--ok">
+            {{ mensajeOk() }}
+          </p>
+        } @else if (reservaError()) {
+          <p class="modal__text modal__text--error">
+            {{ reservaError() }}
+          </p>
+        }
+
+        <button class="modal__button" (click)="cerrarModal()">
+          Cerrar
+        </button>
+      </div>
+    </div>
   }
 </section>
